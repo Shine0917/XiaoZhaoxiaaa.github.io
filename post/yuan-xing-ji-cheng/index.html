@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | Gridea</title>
+<title>原型继承 | Gridea</title>
 <meta name="description" content="温故而知新" />
 <link rel="shortcut icon" href="https://xiaozhaoxiaaa.github.io//favicon.ico?v=1575170270206">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,37 +73,99 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              原型继承
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2019-12-01
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+                <h2 id="原型继承">原型继承</h2>
+<p>HTMLDivElement.prototype._<em>proto</em>_ == HTMLElement.prototype;</p>
+<p>HTMLElement.prototype ._<em>proto</em>_ == Element.prototype;</p>
+<p>ary = [1,2,3];</p>
+<p>ary._<em>proto</em>_ = Array.prototype;</p>
+<p>Array.prototype._<em>proto</em>_ = Object.prototype;</p>
+<pre><code class="language-js">function A(){
+  this.a =1;
+}
+A.prototype.getA = function () {};
+B.prototype.getB = function (){};
+
+Object.prototype.getO = function (){};
+// Object是A这个类的一个父类，
+let a = new A;
+let b= new B;
+console.log(a.b);
+
+let bb = new B;
+// 循环B的实例，判断如果是私有属性放在A.prototype上，如果是公有属性，放在A.prototype.__proto__上
+for(var key in bb) {
+  if(bb.hasOwnProperty(key)) {
+    A.prototype[key] = bb[key]
+  }else {
+    A.prototype.__proto__[key] = 
+  }
+}
+
+</code></pre>
+<pre><code class="language-js">
+class AA {
+  constructor(n,m) {
+    // A类本身，this就是AA的实例
+   this.x = n;
+   this.y =m;
+  }
+   getX(){};
+   getY(){};
+}
+let a1 = new AA(1,2);
+console.log(a1);
+console.log(AA.prototype); // constructor 
+
+
+
+</code></pre>
+<pre><code class="language-js">class A{
+  constructor() {
+    this.a = &quot;aa&quot;;
+  }
+  getA(){
+    console.log(this);
+  };
+  
+}
+
+class B extends A{
+  constructor(){
+    // 这里的其实就是call继承中的写法  A.call(this);
+    this.b = &quot;bb&quot;;
+    super();  // 这个super相当于A 类中的constructor
+  }
+  getB(){ // B类原型上的方法
+    super.getA()
+  };
+}
+
+let b1 = new B;
+b1.getB();
+
+
+</code></pre>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
+<li><a href="#%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF">原型继承</a></li>
 </ul>
 </li>
 </ul>
@@ -113,6 +175,15 @@
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://xiaozhaoxiaaa.github.io//post/js-shi-jian">
+              <h3 class="post-title">
+                js事件
+              </h3>
+            </a>
+          </div>
         
 
         

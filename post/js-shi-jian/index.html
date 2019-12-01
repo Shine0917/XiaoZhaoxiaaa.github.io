@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | Gridea</title>
+<title>js事件 | Gridea</title>
 <meta name="description" content="温故而知新" />
 <link rel="shortcut icon" href="https://xiaozhaoxiaaa.github.io//favicon.ico?v=1575170270206">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,37 +73,67 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              js事件
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2019-12-01
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+                <h2 id=""></h2>
+<p>给事件行为绑定一个函数，只要触发这个行为，就会主动执行这个函数，只要执行这个函数浏览器就会默认给这函数传一个参数，这个参数就是事件对象，这个事件对象记录了触发事件一瞬间的信息</p>
+<p>同一个事件行为绑定的一个函数，每一次触发事件行为执行这个函数的事件对象都是不一样的</p>
+<p>当点击box的时候，也会同时触发body的onclick事件行为，此时就点击了一下，只有一个鼠标，浏览器只会得到一个事件对象，只不过是将同一个事件对象分别传给了两个函数</p>
+<pre><code class="language-js">box.onclick = function (e) {
+  console.log(e); // e mouseEvent
+  e.clientX; // 记录当前点击的那一瞬间鼠标距离屏幕左边的距离
+  e.clientY; // 记录当前点击的那一瞬间鼠标距离屏幕上边的距离
+  e.pageX; // 记录当前点击的那一瞬间鼠标距离整个网页左边的距离
+  e.pageY; // 记录当前点击的那一瞬间鼠标距离整个网页上边的距离
+  e.target;  //事件源  当前触发事件的元素
+  e.type; // 事件类型 DOM2级事件绑定的第一个参数
+  e.stopPropagation(): // 阻止事件等冒泡传播
+  e.preventDefault() // 阻止默认行为
+
+  // 在低版本IE下，浏览器不会默认传参数，他的事件对象window.event(由于是全局属性，鼠标每次操作都会把上一次操作的值替换掉)
+  e = e|| window.event;
+  e.target // 事件源是 window.event.srcElement
+  
+  console.log(this);  // box  给谁绑的，this就是谁
+
+  
+}
+
+document.body.onclick= function(e) {
+ console.log(e);
+  // 当点击box的时候也会触发body的onclick，但是事件源e.target是box
+  // e.target 
+  
+  console.log(this); // body  给谁绑的，this就是谁
+}
+
+
+if(!e) {
+  e= window.event;
+  console.log(e.srcElement); // e.srcElement 是获取事件源（标准中使用的是e.target）
+  
+  console.log(e.pageX); // 低版本浏览器的事件对象中不存在pageX/pageY
+}
+</code></pre>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
+<li></li>
 </ul>
 </li>
 </ul>
@@ -113,6 +143,15 @@
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://xiaozhaoxiaaa.github.io//post/gao-jie-zu-jian">
+              <h3 class="post-title">
+                高阶组件
+              </h3>
+            </a>
+          </div>
         
 
         

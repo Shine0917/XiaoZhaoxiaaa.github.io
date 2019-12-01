@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xiaozhaoxiaaa.github.io/</id>
     <title>Gridea</title>
-    <updated>2019-12-01T03:12:58.657Z</updated>
+    <updated>2019-12-01T03:18:00.422Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xiaozhaoxiaaa.github.io/"/>
     <link rel="self" href="https://xiaozhaoxiaaa.github.io//atom.xml"/>
@@ -10,6 +10,909 @@
     <logo>https://xiaozhaoxiaaa.github.io//images/avatar.png</logo>
     <icon>https://xiaozhaoxiaaa.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[js面向对象]]></title>
+        <id>https://xiaozhaoxiaaa.github.io//post/js-mian-xiang-dui-xiang</id>
+        <link href="https://xiaozhaoxiaaa.github.io//post/js-mian-xiang-dui-xiang">
+        </link>
+        <updated>2019-12-01T03:17:24.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="js面向对象">JS面向对象</h3>
+<h3 id="单例模式singleton-pattern">单例模式（Singleton Pattern)</h3>
+<blockquote>
+<p>在真实项目中，为了实现模块化开发，或者团队协作开发，我们经常运用单例模式（一般业务逻辑部分的代码都是依托单例模式设计规划的）</p>
+</blockquote>
+<p>把描述同一件事务的特征或者属性，进行归纳汇总（放在一起），以此来避免全局变量之前的冲突</p>
+<blockquote>
+<p>把描述同一件事务的属性或者方法放在某一个命名空间下，</p>
+</blockquote>
+<h3 id="使用单例模式实现模块化开发">使用单例模式实现模块化开发</h3>
+<blockquote>
+<p>模块化开发： 在团队协作开发的时候，我们经常会把一个复杂的页面</p>
+</blockquote>
+<h3 id="高级单例模式">高级单例模式</h3>
+<blockquote>
+<p>基于JS高阶编程技巧<code>惰性思想</code>来实现的单例模式，并且可以把一些常用的设计模式（例如：命令模式、发布订阅模式、Promise设计模式）融合进来。最后清晰的规划我们的业务逻辑代码，方便后期二次开发和维护，这种设计思想综合体就是高级单例模式。也是项目中最常用的</p>
+</blockquote>
+<pre><code class="language-js">var searchModel = (function() {
+  function submit() {
+}
+  function fn() {
+    ...
+  }
+  return {
+    init: function(){
+      
+    }
+  }
+})();
+</code></pre>
+<h3 id="关于数据类型的">关于数据类型的</h3>
+<ul>
+<li>
+<p>String：字符串类</p>
+</li>
+<li>
+<p>Boolean： 布尔类</p>
+</li>
+<li>
+<p>Null</p>
+</li>
+<li>
+<p>Undefined： 浏览器屏蔽了我们操作的Null或者Undefined这个类</p>
+</li>
+<li>
+<p>Object：对象类。每一个对象数据类型都是它的实例</p>
+<ul>
+<li>Array： 数组类</li>
+<li>RegExp： 正则类</li>
+<li>Date：日期类</li>
+<li>...</li>
+</ul>
+</li>
+<li>
+<p>Function: 函数类，每一个函数都是它的一个实例</p>
+</li>
+</ul>
+<h4 id="关于元素对象和元素集合的">关于元素对象和元素集合的</h4>
+<ul>
+<li>HTMlCollection: 元素集合类</li>
+<li>NodeList: 节点集合类</li>
+<li>HTMLDivElement</li>
+<li>HTMLElement</li>
+<li>Element</li>
+<li>Node</li>
+<li>EventTarget</li>
+</ul>
+<pre><code class="language-js">// =&gt; 元素集合类
+getElementsByTagName
+querySelectorAll
+getElementsByClassName
+
+// =&gt; 节点集合类
+getElementsByName
+childNodes
+
+</code></pre>
+<p>![image-20190728122110124](/Users/xiaozhaoxia/Library/Application Support/typora-user-images/image-20190728122110124.png)</p>
+<blockquote>
+<p>document.getElementById它的上下文只能是document,其他不可以?</p>
+<p>因为getElementById这个方法只有Document这个类才有，其他的类没有，所以只有document这个作为Document的实例才能使用这个方法</p>
+</blockquote>
+<h3 id="基于面向对象创建数据值">基于面向对象创建数据值</h3>
+<pre><code class="language-js">var ary = [12,23]; //字面量创建方式
+
+var ary = new Array(); // =&gt; 严谨的基于面向对象（构造函数）方式创建一个数组
+
+/* 
+* 两种创建方式在核心意义上没有区别，都是创建Array这个类的一个实例，但是在语法上是有区别的，
+ 1. 字面量创建方式传递进来什么，都是给数组每一项加入的内容
+ 2.构造函数的创建方式
+  new Array(10): 创建一个长度为10的数组，数组中的每一项都是空
+  new Array('10'): 如果只传递一个实参，并且参数不是数字，相当于把当前值作为数组的第一项存储进来
+  new Array(10,20,30): 如果传递多个实参，不是设置长度，而是把传递的内容当作数组中的每一项存储起来
+*/
+
+var obj ={
+  name: 'xiao';
+}
+var obj = new Object();  // 一般只用于创建空对象，如果需要增加键值对，创建完成后自己依次添加即可
+
+//基本数据类型
+var num =12;// 字面量创建出来的是一个基本数据类型值，（但也是Number的一个实例，可以调取Number赋予它的方法）
+num.toFixed: 就是Number赋予它的方法
+var num = new Number(12); //构造函数方式，创建出来的也是Number的一个实例，也可以使用Number赋予它的方法，但是获取的结果是对象数据类型的
+</code></pre>
+<h3 id="构造函数设计模式constructor">构造函数设计模式（constructor）</h3>
+<blockquote>
+<p>使用构造函数方式，主要是为了创建类和实例，也就是基于面向对象编程思想来实现一些需求的处理</p>
+</blockquote>
+<blockquote>
+<p>在JS中，当我们使用<code>new xxx()</code>执行函数的时候，此时的函数就不是普通的函数了，而是变为一个类，返回的结果叫做当前的类的实例，我们这种new xxx 执行的方式称为<code>构造函数设计模式</code></p>
+</blockquote>
+<pre><code class="language-js">function fn() {
+  ...
+}
+var f = new fn(); // fn是一个类, f是当前这个类的一个实例 &quot;构造函数设计模式&quot;  (我们一般都会把类名第一个字母大写)。。 应该是： var f = new Fn();  小写也不会报错，只是语法上更规范
+  
+</code></pre>
+<blockquote>
+<p>普通函数执行与构造函数执行的区别</p>
+<p>普通函数执行</p>
+<p>1.开辟一个新的私有作用域</p>
+<p>2.形参赋值</p>
+<p>3.变量提升</p>
+<p>4.代码自上而下执行（return 后面的结果就是当前函数返回的结果）</p>
+<p>5.栈内存释放或者不释放问题</p>
+</blockquote>
+<pre><code class="language-js">function fn(num) {
+  this.num = num; // =&gt; this: window  给全局对象增加一个num的属性名，属性值是10
+  var total = null;
+  total+=num;
+  return total;
+}
+var f =fn(10); // f: 10
+
+方法前面没有`点`,所以this是window
+</code></pre>
+<blockquote>
+<p>构造函数执行</p>
+<p>1.首先和普通函数执行一样，也需要开辟一个新的私有作用域</p>
+<p>2.在私有作用域中完成类似于普通函数的操作，形参赋值以及变量提升</p>
+<p>3.在代码自上而下执行之前，构造函数有属于自己比较特殊的操作：<code>浏览器会在当前作用域中默认创建一个对象数据类型的值,并且会让当前函数中的执行主体（this）指向创建的这个对象</code></p>
+<p>4.像普通函数一样，代码自上而下执行：<code>this.xxx = xxx 这里操作都是在给创建的这个对象增加属性名和属性值</code></p>
+<p>5.代码执行完成后，即使函数中没有写return，在构造函数模式中：<code>浏览器会默认把创建的对象返回到函数的外面</code></p>
+</blockquote>
+<p>构造函数执行，即具备普通函数执行的一面，也同时具备自己独有的一些操作</p>
+<p><code>在构造函数执行期间，浏览器默认创建的对象（也就是函数体中的this）就是当前这个类的一个实例，浏览器会把默认创建的实例返回，所以我们说，new Fn()执行，Fn是一个类，返回的结果是Fn这个类的一个实例</code></p>
+<blockquote></blockquote>
+<pre><code class="language-js">function Fn(num){
+  // =&gt; 在构造函数模式中，方法体中出现的THIS是当前类的一个实例（this.xxx= xxx 都是在给当前实例增加一些私有属性）
+  this.num = num;
+}
+var f = new Fn(10);
+</code></pre>
+<h3 id="深入理解构造函数执行的步骤">深入理解构造函数执行的步骤</h3>
+<blockquote>
+<p>1.当构造函数或者类，执行的时候不需要传递任何的实参值，此时我们是否加小括号就不重要了（不传递实参的情况下，小括号可以省略）</p>
+<p>2.构造函数执行，同时具备普通函数的一面，也有自己特殊的一面，但是和实例相关的，只有自己特殊的一面才相关（也就是this.xxx =xxx 才相当于给当前实例增加的私有属性），函数体中出现的私有变量，和实例都没有直接的关系</p>
+<p>3.通过类创建出来的每一个实例都是单独的个体（单独的堆内存空间），实例和实例之间是不相同，并且独立互不影响的（市面上部分开发把这种模式叫做单例模式，这种说法是错的，JS中这种模式叫做构造函数设计模式）</p>
+<p>4.在构造函数体中，通过this.xxx = xxx给实例设置的属性都是当前实例的<code>私有属性</code></p>
+</blockquote>
+<pre><code>function Fn() {
+  var num = 100;
+  this.name = 'xiaoming';
+  this.sum = function (){};
+
+}
+var f1 = new Fn();  // Fn是一个类。f1是当前类的一个实例
+var f2 = new Fn; // 没有传递实参，小括号省略
+
+// =&gt; 私有变量和实例没关系
+console.log(f1.num);  //undefined
+console.log(f1.name); // xiaoming
+
+console.log（f1===f2）; // false
+不同实例是不同的空间地址
+
+console.log(f1.sum === f2.sum);// false
+
+</code></pre>
+<p>![image-20190728151026472](/Users/xiaozhaoxia/Library/Application Support/typora-user-images/image-20190728151026472.png)</p>
+<pre><code class="language-js">function Fn(){
+  this.name = '笑话'
+  return 10;
+}
+var f = new Fn();// f依然是当前类的一个实例
+
+
+function Fn(){
+  this.name = '笑话'
+  return {name: 'xxx'};
+}
+var f = new Fn();// f不再是Fn的一个实例，而是变成手动返回的对象，  // name:'xxx'
+</code></pre>
+<blockquote>
+<p>当构造函数体中，我们自己手动设置了return（默认返回的是实例：对象类型值）,return 的是一个基本类型值，对最后的返回实例没有任何影响，但是如果返回的是引用数据类型的值，会把默认返回的实例替换掉。</p>
+</blockquote>
+<h3 id="instanceof">instanceOf</h3>
+<p>检测数据类型的四种方式：</p>
+<p>instanceOf</p>
+<p>typeOf :null 返回Object, 无法具体细分，</p>
+<p>constructor</p>
+<p>Object. toString()  call ??</p>
+<blockquote>
+<p>instanceOf 用来检测当前实例是否隶属于某个类</p>
+<p>解决了typeOf无法识别是数组还是正则的问题</p>
+</blockquote>
+<pre><code class="language-js">function Fn(){
+  
+}
+
+var f = new Fn();
+console.log(f instanceOf Fn); // true
+
+</code></pre>
+<pre><code class="language-js">[] instanceOf Array // true
+/^$/ instanceOf  Array // false
+解决了typeOf无法识别是数组还是正则的问题
+
+</code></pre>
+<h3 id="原型链查找">原型链查找</h3>
+<p>![image-20190728155850248](/Users/xiaozhaoxia/Library/Application Support/typora-user-images/image-20190728155850248.png)</p>
+<h3 id="hasownproperty-vs-in">hasOwnProperty  vs in</h3>
+<blockquote>
+<p>in： 用来检测当前这个属性是否隶属于对象（不管是对象私有的还是公有的属性，只要有返回的就是true）</p>
+<p>hasOwnProperty: 用来检测当前这个属性是否是对象的私有属性（不仅要是对象的属性，而且要是私有的才可以）</p>
+</blockquote>
+<pre><code class="language-js">var obj = {name: 'xiaohuao', age: 9};
+
+'name' in obj // true
+'sex' in obj // false;
+'toString' in obj  // true
+'hasOwnProperty' in obj // true 
+hasOwnProperty 是Object这个内置类中提供的属性方法，只要当前对象是Object的一个实例，就可以使用这个方法
+
+obj.hasOwnProperty('name'); //true
+obj.hasOwnProperty('hasOwnProperty'); // false  hasOwnProperty不是obj私有的，而是Object是的一个方法
+
+
+
+</code></pre>
+<blockquote>
+<p>检测一个属性是否是当前对象的公有属性</p>
+<p>1.是对象的一个属性</p>
+<p>2.不是对象的私有属性</p>
+</blockquote>
+<pre><code class="language-js">function hasPubProperty(attr,obj) {
+  return (attr in obj) &amp;&amp; (obj.hasOwnProperty(attr) === false);
+}
+
+hasPubProperty('hasOwnProperty', {xxx: 'xxx'});  hasOwnProperty是所有Object的一个属性
+
+
+
+</code></pre>
+<h3 id="原型和原型链property">原型和原型链（property）</h3>
+<h4 id="js中对象和函数汇总">JS中对象和函数汇总：</h4>
+<blockquote>
+<p>对象数据类型的值</p>
+<ul>
+<li>{}普通对象</li>
+<li>[]数组</li>
+<li>/^$/正则</li>
+<li>Math 数学函数</li>
+<li>一般类的实例都是对象数据类型的</li>
+<li>函数的property属性</li>
+<li>实例的__proto__属性</li>
+<li>函数也是对象数据类型的。？？</li>
+</ul>
+<p>函数数据类型值：</p>
+<ul>
+<li>普通函数</li>
+<li>所有的类（包含内置类和自定义类）</li>
+</ul>
+</blockquote>
+<h3 id="原型">原型</h3>
+<blockquote>
+<p>1.所有函数都天生自带一个属性：</p>
+<p>prototype（原型），它是一个对象数据类型的值，在当前对象中存储了类需要給其实例使用的公有的属性和方法</p>
+<p>2.在函数的prototype这个对象，浏览器会默认为其开辟一个堆内存，在这个堆内存中天生自带一个属性：</p>
+<p>constructor（构造函数)，这个属性存储的值就是当前函数本身</p>
+<p>3.每一个类的实例（每一个对象）都天生自带一个属性： _<em>proto</em>_，属性值是当前对象所属类的原型（prototype），</p>
+</blockquote>
+<pre><code class="language-js">function Fn(name,age) {
+  this.name = name;
+  thia.age = age;
+  this.say = function () {
+    consle.log('my name is '+ this.name + 'I am ' + this.age + 'years old!')
+  }
+}
+
+Fn.prototype.say= function () {
+  console.log('hello world')
+};
+
+Fn.prototype.eat= function () {
+  console.log('I like food')
+};
+
+var f1 = new Fn('王燕燕', 19);
+var f2 = new Fn('王雪超', 69);
+
+</code></pre>
+<p>![image-20190728185428138](/Users/xiaozhaoxia/Library/Application Support/typora-user-images/image-20190728185428138.png)</p>
+<p>![image-20190728185745656](/Users/xiaozhaoxia/Library/Application Support/typora-user-images/image-20190728185745656.png)</p>
+<p>![image-20190728192716932](/Users/xiaozhaoxia/Library/Application Support/typora-user-images/image-20190728192716932.png)</p>
+<p>![image-20190728192913523](/Users/xiaozhaoxia/Library/Application Support/typora-user-images/image-20190728192913523.png)</p>
+<p>私有和公有是一个相对论，我们需要看相对于哪个对象而言：</p>
+<p>1.相对于实例来说push是公有的</p>
+<p>2.相对于Array.prototype来说，push就是自己私有的</p>
+<p>凡是通过__proto__找到的属性都是公有的，反之都是私有的</p>
+<p>ary.</p>
+<p>让类数组： arguments可以使用数组的方法,   IE浏览器屏蔽了我们使用或者修改_<em>proto</em>_</p>
+<p>Arguments._<em>proto</em>_  = Array.prototype</p>
+<h3 id="原型链中的this问题">原型链中的this问题</h3>
+<pre><code class="language-js">function Fn(name,age) {
+  this.name = name;
+  thia.age = age;
+  this.say = function () {
+    consle.log('my name is '+ this.name + 'I am ' + this.age + 'years old!')
+  }
+}
+
+Fn.prototype.say = function () {
+  console.log('i am ' + this.age + 'years old');
+}
+Fn.prototype.eat = function () {
+  console.log('i love food');
+}
+              
+ var f1 = new Fn('张学波'，20)；
+  var f2 = new Fn('冀闯'，21)；
+  f1.say();  // =&gt; this: f1   查找私有的属性
+  f1.__proto__.say();// 查找公有的属性和方法， this： f1.__proto__ 
+ // 相当于 'i am '+ f1.__proto__.age (undefined) + 'years old' 
+  
+  Fn.prototype.say();  // undefined
+  
+  // 关于原型链中提供的私有（公有）方法中的this指向问题：
+  1.看点前面是谁，this就是谁
+   // f1.say();  // =&gt; this: f1
+   // f1.__proto__.say();// 查找公有的属性和方法， this： f1.__proto__ 
+    Fn.prototype.say();  // undefined  this：  Fn.prototype
+  2.把需要执行方法中的this进行替换
+  3.替换完成后，如果想要知道结果，只需要按照原型链的查找机制去查找即可
+
+
+
+</code></pre>
+<p>![image-20190728185745656](/Users/xiaozhaoxia/Library/Application Support/typora-user-images/image-20190728185745656.png)</p>
+<pre><code class="language-js">function Fn(name,age) {
+  this.name = name;
+  this.age = age;
+ 
+}
+
+var f  = new Fn('xxx',28);
+
+
+</code></pre>
+<p><a href="https://blog.csdn.net/shelbyandfxj/article/details/82769891">判断是不是空对象，空数组</a></p>
+<h3 id="批量增加">批量增加</h3>
+<pre><code class="language-js">function Fn(name,age) {
+  this.name = name ;
+  this.age = age;
+}
+Fn.prototype.aa = function (){
+}
+Fn.prototype.bb = function (){}
+var f = new Fn('xxx',25);
+
+/*  使用设置别名法 */
+//var pro = Fn.prototype; // =&gt; 指向同一个堆内存
+// 则pro.aa = functin(){};
+// pro.bb = function (){};
+
+
+// 重新构造原型
+Fn.prototype.cc = function (){...}
+Fn.prototype = {
+  // 让原型指向自己开辟的堆内存有一个问题：自己开辟的堆内存中没有constructor属性，所以实例在调取constructor的时候，找到的是Object，这样不好，此时我们应该重新设置一个constructor，保证机制的完整性
+  constructor: Fn,  // 所以加上
+  aa: function (){},
+  bb: function (){}
+ 
+}
+var pub = {}
+
+f.cc  =&gt; //undefined: 重新做原型指向后，之前在浏览器默认开辟的堆内存中存储的属性和方法都没用了，只有在新内存中存储的才是有用的
+
+
+// Array.prototype.aa = 12;
+// Array.prototype = {}; // 内置类原型不允许我们进行重构
+
+～function (){
+  var jQuery = function (selector,context) {
+    return new jQuery.fn.init(selector, context);
+  };
+  jQuery.fn = jQuery.prototype = {
+    constructor: jQuery,
+    init: function (selector,context)
+  };
+    window.$ = window.jQuery 
+}();
+
+</code></pre>
+<h3 id="基于内置类的原型扩展方法">基于内置类的原型扩展方法</h3>
+<pre><code class="language-js">// 数组去重方法
+
+// 我们新增加的方法最好设置一个前缀，防止我们新增的方法和内置的方法冲突，把内置方法替换掉了
+Array.prototyp.myDistinct = function myDistinct () {
+  this: // ary当前要处理的那个数组
+  var obj ={};
+   for(var i =0; i&lt; this.length; i++){
+    var item = this[i];
+    if(typeof obj[item] !== 'undefined'){
+      this[i] = this[this.length -1];
+      this.length--;
+      i--;
+      continue;
+    }
+    obj[item]= item;
+  }
+  obj = null;
+  return this; // 实现链式写法，返回去重后的数组，这样执行完成这个方法后，我们还可以继续调取数组中的其他方法
+}
+
+/*  function distinct(ary){
+  var obj = {};
+  for(var i =0; i&lt; ary.length; i++){
+    var item = ary[i];
+    if(typeof obj[item] !== 'undefined'){
+      ary[i] = ary[ary.length -1];
+      ary.length--;
+      i--;
+      continue;
+    }
+    obj[item]= item;
+  }
+  obj = null;
+  return ary;
+}
+*/
+
+var ary = [1,2,3,1,3,4,2];
+ary.myDistinct().sort();
+
+// console.log(distinct(ary));
+console.log(ary);
+
+// =&gt; 链式写法：执行完成一个方法紧跟着剧调取下一个方法(执行完成一个方法后，返回的结果依然是当前类的实例，这样就可以继续调取当前类的其他方法操作了)
+
+// ary.sort(function (a,b) {
+//  return a-b;     //push之后已经不是数组了，所有用pop方法已经不行了，pop是数组上的方法
+// }).push(100).pop(); // Uncaught TypeError: Ary.sort(...).push(...).pop is not a function 
+ary.sort(function (a,b) {
+  return a-b;
+}).push(100);
+
+</code></pre>
+<p>数组的    意义，参数，返回值，原来数组是否改变</p>
+<pre><code class="language-js">// 实现  (3).plus(2).minus(1)  =&gt; 4
+Number.prototype.plus = function plus () {
+  // 不传argument 。则undefined  =&gt; false 
+  var value = Number(arguments[0]) || 0;
+ return this + arguments[0]
+}
+Number.prototype.minus = function minus() {
+    var value = Number(arguments[0]) || 0;
+  return this - arguments[0];
+}
+
+console.log((3).plus(2).minus(1));
+
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[call]]></title>
+        <id>https://xiaozhaoxiaaa.github.io//post/call</id>
+        <link href="https://xiaozhaoxiaaa.github.io//post/call">
+        </link>
+        <updated>2019-12-01T03:16:17.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="caller和arguments的callee">caller和arguments的callee</h2>
+<p>只要是函数就有prototype ,_<em>proto</em>_</p>
+<p>函数的caller</p>
+<pre><code class="language-js">// 函数中的caller表示： 当前这个函数在哪个函数中调用的
+function fn() {
+  fn.caller();// 死循环啦，一直执行
+ //  console.log(fn.caller);  F   // fn.caller 是一个函数  如果fn.caller(); 则相当于执行这个函数
+}
+function ff() {
+  fn();
+}
+ff(); // [Function: ff]
+
+function F() {
+  fn();  
+}
+F();  //[Function: F]
+
+</code></pre>
+<pre><code class="language-js">function fn() {
+  // arguments.callee就是当前函数本身
+  console.log(arguments.callee === fn);  // d
+}
+fn(1,2,3)
+
+// fn.prototype.constructor也是函数本身
+// fn.prototype.constructor === fn;
+// arguments.callee === fn
+
+// 递归：函数自己调用自己
+function sum(n) {
+  if(n==100) {
+    return n
+  }else {
+    return n+sum(n+1);
+    return n+arguments.callee(n+1); // 等价
+    return n+ sum.prototype.constructor(n+1); //等价
+  }
+}
+sum(0);
+</code></pre>
+<h2 id="call-applybind">call, apply,bind</h2>
+<h3 id="call作用">call作用：</h3>
+<p>1.改变前面函数的this<br>
+2.让前面的函数执行</p>
+<h3 id="call的参数问题">call的参数问题</h3>
+<p>call的第一个参数是给前面函数改this用的</p>
+<p>call从第二个参数开始，是给前面函数传递参数</p>
+<pre><code class="language-js">call: Function 类原型上的一个公有的方法
+1.任何函数都可以使用call方法
+2.call也是一个函数
+Function.prototype.call 是一个函数
+
+call作用：
+1.改变前面函数的this
+2.让前面的函数执行
+call的参数问题
+call(); &lt;=&gt;call(null); &lt;=&gt; call(undefined); 这三种情况前面函数的this是window 
+function fn() {
+  console.log(this);  // this: window
+}
+
+ fn.call(); fn.call(null);  fn.call(undefined)
+// fn.__proto__ 找到Function.prototype 
+
+call从第二个参数开始，是给前面函数传递参数
+var obj={};
+function fn(n,m) {
+  console.log(n,m,this);  //obj
+}
+fn.call(obj,2,3);
+
+//如果不想改变this，可以写成fn.call(null,2,3); 第一个参数可以是null, undefined
+
+
+var obj = {};
+function A(a){  // a= undefined;   a= 10;
+  this.a = 1;   // window.a = 1     obj.a =1;
+  this.b =a;  // window.b = undefined   obj.b =10;
+}
+A();  // 执行 此时的this 是window  A前面没有点
+A.call(obj,10);// this =&gt; obj
+console.log(a);// 1
+console.log(b);// undefined
+console.log(obj);  //{a:1, b:10}
+
+</code></pre>
+<pre><code class="language-js">call方法有两个作用： 让`点`前面的函数执行
+Function.prototype.call = function () {
+  // this 谁执行这个call方法，this就是谁
+  // call前面的函数就是this，既然call可以让前面的函数执行，在这里就是this执行
+  
+  //第一个参数没传,null,undefined,直接让this();
+  var ary = [...arguments].slice(1);// 第二个参数
+  if(arguments[0] ==undefined){  null == undefined
+     this(...ary);
+       // eval(&quot;this(&quot;+ary+&quot;)&quot;);
+  }else {
+    //为了保证传进来的第一个参数是一个引用数据类型
+    var obj = Object(auguments[0]); // Object将参数转为对象
+    
+    obj.__proto__.fn = this;
+    obj.fn(...ary);
+    delete obj.__proto__.fn;
+  }
+ 
+  //return 1;
+}
+function fn(){  
+  console.log('我是fn');
+}
+function fn1() {
+  console.log('我是fn1');
+}
+console.log(fn.call()); // 
+console.log(fn1.call()); 
+</code></pre>
+<h2 id="bind">bind</h2>
+<p>改变函数this得到一个新的函数</p>
+<p>// bind(), bind(null), bind(undefined),新函数的this都是window</p>
+<p>⚠️：bind不会让函数执行，</p>
+<pre><code class="language-js">function fn() {
+  console.log(this);
+}
+var ff = fn.bind();
+ff和fn长的一样，但是里面的this变成了bind改变后的
+console.log(ff.name); // &quot;bound fn&quot;
+
+
+var obj = {a:1};
+function f1() {
+  console.log(this);
+}
+setInterval(f1.bind(obj1),2000);  // 到点执行
+box.onclick = f1;  // 点击的时候执行
+f1();  ()执行
+</code></pre>
+<p>函数作为参数的都是函数的定义，没有执行</p>
+<h2 id="apply">apply</h2>
+<p>apply和call一样，都能让函数自动执行，唯一区别就是参数形式不一样</p>
+<p>// apply的第二个参数是一个数组或者是类数组，也是用来给前面函数传参数用的</p>
+<pre><code class="language-js">var obj = {a:1};
+function sum() {
+  console.log(this);
+  return [...arguments].reduce((prev,cur) =&gt; {
+    return prev+ cur;
+  })
+}
+
+console.log(sum.call(obj,1,2,3,4,5));
+console.log(sum.apply(obj,[1,2,3,4,5]));
+</code></pre>
+<h2 id="检测数据类型">检测数据类型</h2>
+<p>typeof: 可以详细检测基本数据类型, 但是null结果为object，但是引用数据类型不可以详细检测，只有两个结果，一个是<code>object</code>,一个是<code>function</code></p>
+<p>instanceOf: 用来检测一个实例是否属于某个类，但是对于基本数据类型来说，使用字面量创建方式创建的检测结果为false，但是构造函数创建方式没问题</p>
+<p>constructor： 可以通过<code>内容.constructor.name</code>得到数据类型，</p>
+<p>Object.prototype.toString.call(想要检测的数据类型)； // [object, 数据类型]</p>
+<pre><code>var obj = {a:1};
+console.log(obj.toString()); //[object Object]
+
+obj.toString(),是Object原型上的公有方法，toString()
+
+var ary = [1,2,3];
+obj.toString.call(ary);  [object, Array]
+console.log(obj.toString.call(ary).slice(8, -1)) // 包括8 ，不包括-1
+var str = &quot;123&quot;;
+obj.toString.call(str);   [object, String]
+
+
+</code></pre>
+<pre><code class="language-js">function FF() {
+  this.a = &quot;aa&quot;;
+  this.b = &quot;bb&quot;;
+}
+FF.prototype.getA = function () {}
+  var f1 = new FF();
+Object.prototype.zf = 'xiao';
+console.log(f1.__proto__.__proto__.zf);
+console.log(FF.prototype); 
+// 1.for既可以遍历私有属性也可以遍历公有属性，
+// 2.但是只能遍历可枚举的属性
+  for(var key in f1){
+    console.log(key);
+    console.log(f1[key]); 
+  }
+  
+console.log(Object.getOwnPropertyDescriptor(FF.prptotype, &quot;constructor&quot;));
+
+
+Object.prototype.zz = 'xixi';
+var obj1 = {name: 'xiaoming',age:12};
+var obj2 = {name: 'xiaoming', study:'js'};
+
+for(var key in obj2) {
+  if(obj2.hasOwnProperty(key)) { // 防止复制公有属性
+    obj1[key] = obj2[key];
+  }
+}
+
+console.log(obj1);
+
+
+function AA() {
+  this.x = 1;
+  this.y =2;
+}
+AA.prototype.getX = function (){};
+AA.prototype.getY = function (){};
+var aa = new AA;
+// 克隆一个跟aa一样的对象bb(aa的私有属性也是bb的私有属性，aa的公有属性也要加在bb所属类的原型上)
+function BB(){};
+var bb = new BB;
+
+</code></pre>
+<p>JSON是一种数据格式</p>
+<p>JSON对象 属性名必须使用双引号包起来</p>
+<pre><code class="language-js">var obj = {&quot;a&quot;:1,&quot;b&quot;:2};
+var ary = [{&quot;a&quot;: 1, &quot;b&quot;: 2}, {&quot;a&quot;: 10, &quot;b&quot;:20}]
+
+</code></pre>
+<h2 id="函数中的几个问题">函数中的几个问题</h2>
+<pre><code class="language-js">// 函数中的caller表示： 当前这个函数在哪个函数中调用的
+function fn() {
+  fn.caller();// 死循环啦
+ //  console.log(fn.caller);  F
+}
+function F() {
+  fn();  
+}
+F();
+console.log(fn.caller())
+</code></pre>
+<p>构造函数中的this是当前实例</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[字符串处理-时间字符串格式化]]></title>
+        <id>https://xiaozhaoxiaaa.github.io//post/zi-fu-chuan-chu-li-shi-jian-zi-fu-chuan-ge-shi-hua</id>
+        <link href="https://xiaozhaoxiaaa.github.io//post/zi-fu-chuan-chu-li-shi-jian-zi-fu-chuan-ge-shi-hua">
+        </link>
+        <updated>2019-12-01T03:15:27.000Z</updated>
+        <content type="html"><![CDATA[<p>![image-20191022204651953](/Users/zhaoxia.xiao/Library/Application Support/typora-user-images/image-20191022204651953.png)</p>
+<pre><code class="language-js">~function (pro) {
+  pro.formateTime = function (template){
+		template = template || '{0}年{1}月{2}日 {3}时{4}分{5}秒';
+ 		var ary = this.match(/\d+/g);
+  	template =  template.replace(/\{(\d+)\}/g, function(){
+    var n = arguments[1],
+    val = ary[n] || '0';
+    val &lt; 10 ? val ='0' + val : null;
+    return val;
+  });
+  return template;  
+  }
+}(String.prototype);
+</code></pre>
+<h3 id="url地址栏问号传参解析">URL地址栏问号传参解析</h3>
+<blockquote>
+<p>有一个地址 &quot;http:// www.baidu.com/cn/stu/?tx=1&amp;name=AA&amp;sex=man#teacher&quot;地址问号后面的内容是需要解析出来的参数信息</p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[原型继承]]></title>
+        <id>https://xiaozhaoxiaaa.github.io//post/yuan-xing-ji-cheng</id>
+        <link href="https://xiaozhaoxiaaa.github.io//post/yuan-xing-ji-cheng">
+        </link>
+        <updated>2019-12-01T03:14:20.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="原型继承">原型继承</h2>
+<p>HTMLDivElement.prototype._<em>proto</em>_ == HTMLElement.prototype;</p>
+<p>HTMLElement.prototype ._<em>proto</em>_ == Element.prototype;</p>
+<p>ary = [1,2,3];</p>
+<p>ary._<em>proto</em>_ = Array.prototype;</p>
+<p>Array.prototype._<em>proto</em>_ = Object.prototype;</p>
+<pre><code class="language-js">function A(){
+  this.a =1;
+}
+A.prototype.getA = function () {};
+B.prototype.getB = function (){};
+
+Object.prototype.getO = function (){};
+// Object是A这个类的一个父类，
+let a = new A;
+let b= new B;
+console.log(a.b);
+
+let bb = new B;
+// 循环B的实例，判断如果是私有属性放在A.prototype上，如果是公有属性，放在A.prototype.__proto__上
+for(var key in bb) {
+  if(bb.hasOwnProperty(key)) {
+    A.prototype[key] = bb[key]
+  }else {
+    A.prototype.__proto__[key] = 
+  }
+}
+
+</code></pre>
+<pre><code class="language-js">
+class AA {
+  constructor(n,m) {
+    // A类本身，this就是AA的实例
+   this.x = n;
+   this.y =m;
+  }
+   getX(){};
+   getY(){};
+}
+let a1 = new AA(1,2);
+console.log(a1);
+console.log(AA.prototype); // constructor 
+
+
+
+</code></pre>
+<pre><code class="language-js">class A{
+  constructor() {
+    this.a = &quot;aa&quot;;
+  }
+  getA(){
+    console.log(this);
+  };
+  
+}
+
+class B extends A{
+  constructor(){
+    // 这里的其实就是call继承中的写法  A.call(this);
+    this.b = &quot;bb&quot;;
+    super();  // 这个super相当于A 类中的constructor
+  }
+  getB(){ // B类原型上的方法
+    super.getA()
+  };
+}
+
+let b1 = new B;
+b1.getB();
+
+
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[js事件]]></title>
+        <id>https://xiaozhaoxiaaa.github.io//post/js-shi-jian</id>
+        <link href="https://xiaozhaoxiaaa.github.io//post/js-shi-jian">
+        </link>
+        <updated>2019-12-01T03:13:47.000Z</updated>
+        <content type="html"><![CDATA[<h2 id=""></h2>
+<p>给事件行为绑定一个函数，只要触发这个行为，就会主动执行这个函数，只要执行这个函数浏览器就会默认给这函数传一个参数，这个参数就是事件对象，这个事件对象记录了触发事件一瞬间的信息</p>
+<p>同一个事件行为绑定的一个函数，每一次触发事件行为执行这个函数的事件对象都是不一样的</p>
+<p>当点击box的时候，也会同时触发body的onclick事件行为，此时就点击了一下，只有一个鼠标，浏览器只会得到一个事件对象，只不过是将同一个事件对象分别传给了两个函数</p>
+<pre><code class="language-js">box.onclick = function (e) {
+  console.log(e); // e mouseEvent
+  e.clientX; // 记录当前点击的那一瞬间鼠标距离屏幕左边的距离
+  e.clientY; // 记录当前点击的那一瞬间鼠标距离屏幕上边的距离
+  e.pageX; // 记录当前点击的那一瞬间鼠标距离整个网页左边的距离
+  e.pageY; // 记录当前点击的那一瞬间鼠标距离整个网页上边的距离
+  e.target;  //事件源  当前触发事件的元素
+  e.type; // 事件类型 DOM2级事件绑定的第一个参数
+  e.stopPropagation(): // 阻止事件等冒泡传播
+  e.preventDefault() // 阻止默认行为
+
+  // 在低版本IE下，浏览器不会默认传参数，他的事件对象window.event(由于是全局属性，鼠标每次操作都会把上一次操作的值替换掉)
+  e = e|| window.event;
+  e.target // 事件源是 window.event.srcElement
+  
+  console.log(this);  // box  给谁绑的，this就是谁
+
+  
+}
+
+document.body.onclick= function(e) {
+ console.log(e);
+  // 当点击box的时候也会触发body的onclick，但是事件源e.target是box
+  // e.target 
+  
+  console.log(this); // body  给谁绑的，this就是谁
+}
+
+
+if(!e) {
+  e= window.event;
+  console.log(e.srcElement); // e.srcElement 是获取事件源（标准中使用的是e.target）
+  
+  console.log(e.pageX); // 低版本浏览器的事件对象中不存在pageX/pageY
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[高阶组件]]></title>
+        <id>https://xiaozhaoxiaaa.github.io//post/gao-jie-zu-jian</id>
+        <link href="https://xiaozhaoxiaaa.github.io//post/gao-jie-zu-jian">
+        </link>
+        <updated>2019-12-01T03:13:12.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="高阶函数">高阶函数</h3>
+<p>1.函数可以作为参数被传递</p>
+<pre><code class="language-js">setTimeout(() =&gt; {
+  console.log(1)
+},1000)
+</code></pre>
+<p>2.函数可以作为返回值输出</p>
+<pre><code class="language-js">fucntion foo() {
+  return function (){
+    return x;
+  }
+}
+</code></pre>
+<p>setTimeout 只执行一次， 多久之后执行</p>
+<p>setInterval 多次执行 ，每隔一段时间执行一次</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[盒子模型]]></title>
         <id>https://xiaozhaoxiaaa.github.io//post/he-zi-mo-xing</id>

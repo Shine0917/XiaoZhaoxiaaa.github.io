@@ -1,0 +1,671 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>js面向对象 | Gridea</title>
+<meta name="description" content="温故而知新" />
+<link rel="shortcut icon" href="https://xiaozhaoxiaaa.github.io//favicon.ico?v=1575170270206">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://xiaozhaoxiaaa.github.io//styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://xiaozhaoxiaaa.github.io/">
+  <img class="avatar" src="https://xiaozhaoxiaaa.github.io//images/avatar.png?v=1575170270206" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              js面向对象
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-12-01
+              </span>
+              <span>
+                16 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h3 id="js面向对象">JS面向对象</h3>
+<h3 id="单例模式singleton-pattern">单例模式（Singleton Pattern)</h3>
+<blockquote>
+<p>在真实项目中，为了实现模块化开发，或者团队协作开发，我们经常运用单例模式（一般业务逻辑部分的代码都是依托单例模式设计规划的）</p>
+</blockquote>
+<p>把描述同一件事务的特征或者属性，进行归纳汇总（放在一起），以此来避免全局变量之前的冲突</p>
+<blockquote>
+<p>把描述同一件事务的属性或者方法放在某一个命名空间下，</p>
+</blockquote>
+<h3 id="使用单例模式实现模块化开发">使用单例模式实现模块化开发</h3>
+<blockquote>
+<p>模块化开发： 在团队协作开发的时候，我们经常会把一个复杂的页面</p>
+</blockquote>
+<h3 id="高级单例模式">高级单例模式</h3>
+<blockquote>
+<p>基于JS高阶编程技巧<code>惰性思想</code>来实现的单例模式，并且可以把一些常用的设计模式（例如：命令模式、发布订阅模式、Promise设计模式）融合进来。最后清晰的规划我们的业务逻辑代码，方便后期二次开发和维护，这种设计思想综合体就是高级单例模式。也是项目中最常用的</p>
+</blockquote>
+<pre><code class="language-js">var searchModel = (function() {
+  function submit() {
+}
+  function fn() {
+    ...
+  }
+  return {
+    init: function(){
+      
+    }
+  }
+})();
+</code></pre>
+<h3 id="关于数据类型的">关于数据类型的</h3>
+<ul>
+<li>
+<p>String：字符串类</p>
+</li>
+<li>
+<p>Boolean： 布尔类</p>
+</li>
+<li>
+<p>Null</p>
+</li>
+<li>
+<p>Undefined： 浏览器屏蔽了我们操作的Null或者Undefined这个类</p>
+</li>
+<li>
+<p>Object：对象类。每一个对象数据类型都是它的实例</p>
+<ul>
+<li>Array： 数组类</li>
+<li>RegExp： 正则类</li>
+<li>Date：日期类</li>
+<li>...</li>
+</ul>
+</li>
+<li>
+<p>Function: 函数类，每一个函数都是它的一个实例</p>
+</li>
+</ul>
+<h4 id="关于元素对象和元素集合的">关于元素对象和元素集合的</h4>
+<ul>
+<li>HTMlCollection: 元素集合类</li>
+<li>NodeList: 节点集合类</li>
+<li>HTMLDivElement</li>
+<li>HTMLElement</li>
+<li>Element</li>
+<li>Node</li>
+<li>EventTarget</li>
+</ul>
+<pre><code class="language-js">// =&gt; 元素集合类
+getElementsByTagName
+querySelectorAll
+getElementsByClassName
+
+// =&gt; 节点集合类
+getElementsByName
+childNodes
+
+</code></pre>
+<p>![image-20190728122110124](/Users/xiaozhaoxia/Library/Application Support/typora-user-images/image-20190728122110124.png)</p>
+<blockquote>
+<p>document.getElementById它的上下文只能是document,其他不可以?</p>
+<p>因为getElementById这个方法只有Document这个类才有，其他的类没有，所以只有document这个作为Document的实例才能使用这个方法</p>
+</blockquote>
+<h3 id="基于面向对象创建数据值">基于面向对象创建数据值</h3>
+<pre><code class="language-js">var ary = [12,23]; //字面量创建方式
+
+var ary = new Array(); // =&gt; 严谨的基于面向对象（构造函数）方式创建一个数组
+
+/* 
+* 两种创建方式在核心意义上没有区别，都是创建Array这个类的一个实例，但是在语法上是有区别的，
+ 1. 字面量创建方式传递进来什么，都是给数组每一项加入的内容
+ 2.构造函数的创建方式
+  new Array(10): 创建一个长度为10的数组，数组中的每一项都是空
+  new Array('10'): 如果只传递一个实参，并且参数不是数字，相当于把当前值作为数组的第一项存储进来
+  new Array(10,20,30): 如果传递多个实参，不是设置长度，而是把传递的内容当作数组中的每一项存储起来
+*/
+
+var obj ={
+  name: 'xiao';
+}
+var obj = new Object();  // 一般只用于创建空对象，如果需要增加键值对，创建完成后自己依次添加即可
+
+//基本数据类型
+var num =12;// 字面量创建出来的是一个基本数据类型值，（但也是Number的一个实例，可以调取Number赋予它的方法）
+num.toFixed: 就是Number赋予它的方法
+var num = new Number(12); //构造函数方式，创建出来的也是Number的一个实例，也可以使用Number赋予它的方法，但是获取的结果是对象数据类型的
+</code></pre>
+<h3 id="构造函数设计模式constructor">构造函数设计模式（constructor）</h3>
+<blockquote>
+<p>使用构造函数方式，主要是为了创建类和实例，也就是基于面向对象编程思想来实现一些需求的处理</p>
+</blockquote>
+<blockquote>
+<p>在JS中，当我们使用<code>new xxx()</code>执行函数的时候，此时的函数就不是普通的函数了，而是变为一个类，返回的结果叫做当前的类的实例，我们这种new xxx 执行的方式称为<code>构造函数设计模式</code></p>
+</blockquote>
+<pre><code class="language-js">function fn() {
+  ...
+}
+var f = new fn(); // fn是一个类, f是当前这个类的一个实例 &quot;构造函数设计模式&quot;  (我们一般都会把类名第一个字母大写)。。 应该是： var f = new Fn();  小写也不会报错，只是语法上更规范
+  
+</code></pre>
+<blockquote>
+<p>普通函数执行与构造函数执行的区别</p>
+<p>普通函数执行</p>
+<p>1.开辟一个新的私有作用域</p>
+<p>2.形参赋值</p>
+<p>3.变量提升</p>
+<p>4.代码自上而下执行（return 后面的结果就是当前函数返回的结果）</p>
+<p>5.栈内存释放或者不释放问题</p>
+</blockquote>
+<pre><code class="language-js">function fn(num) {
+  this.num = num; // =&gt; this: window  给全局对象增加一个num的属性名，属性值是10
+  var total = null;
+  total+=num;
+  return total;
+}
+var f =fn(10); // f: 10
+
+方法前面没有`点`,所以this是window
+</code></pre>
+<blockquote>
+<p>构造函数执行</p>
+<p>1.首先和普通函数执行一样，也需要开辟一个新的私有作用域</p>
+<p>2.在私有作用域中完成类似于普通函数的操作，形参赋值以及变量提升</p>
+<p>3.在代码自上而下执行之前，构造函数有属于自己比较特殊的操作：<code>浏览器会在当前作用域中默认创建一个对象数据类型的值,并且会让当前函数中的执行主体（this）指向创建的这个对象</code></p>
+<p>4.像普通函数一样，代码自上而下执行：<code>this.xxx = xxx 这里操作都是在给创建的这个对象增加属性名和属性值</code></p>
+<p>5.代码执行完成后，即使函数中没有写return，在构造函数模式中：<code>浏览器会默认把创建的对象返回到函数的外面</code></p>
+</blockquote>
+<p>构造函数执行，即具备普通函数执行的一面，也同时具备自己独有的一些操作</p>
+<p><code>在构造函数执行期间，浏览器默认创建的对象（也就是函数体中的this）就是当前这个类的一个实例，浏览器会把默认创建的实例返回，所以我们说，new Fn()执行，Fn是一个类，返回的结果是Fn这个类的一个实例</code></p>
+<blockquote></blockquote>
+<pre><code class="language-js">function Fn(num){
+  // =&gt; 在构造函数模式中，方法体中出现的THIS是当前类的一个实例（this.xxx= xxx 都是在给当前实例增加一些私有属性）
+  this.num = num;
+}
+var f = new Fn(10);
+</code></pre>
+<h3 id="深入理解构造函数执行的步骤">深入理解构造函数执行的步骤</h3>
+<blockquote>
+<p>1.当构造函数或者类，执行的时候不需要传递任何的实参值，此时我们是否加小括号就不重要了（不传递实参的情况下，小括号可以省略）</p>
+<p>2.构造函数执行，同时具备普通函数的一面，也有自己特殊的一面，但是和实例相关的，只有自己特殊的一面才相关（也就是this.xxx =xxx 才相当于给当前实例增加的私有属性），函数体中出现的私有变量，和实例都没有直接的关系</p>
+<p>3.通过类创建出来的每一个实例都是单独的个体（单独的堆内存空间），实例和实例之间是不相同，并且独立互不影响的（市面上部分开发把这种模式叫做单例模式，这种说法是错的，JS中这种模式叫做构造函数设计模式）</p>
+<p>4.在构造函数体中，通过this.xxx = xxx给实例设置的属性都是当前实例的<code>私有属性</code></p>
+</blockquote>
+<pre><code>function Fn() {
+  var num = 100;
+  this.name = 'xiaoming';
+  this.sum = function (){};
+
+}
+var f1 = new Fn();  // Fn是一个类。f1是当前类的一个实例
+var f2 = new Fn; // 没有传递实参，小括号省略
+
+// =&gt; 私有变量和实例没关系
+console.log(f1.num);  //undefined
+console.log(f1.name); // xiaoming
+
+console.log（f1===f2）; // false
+不同实例是不同的空间地址
+
+console.log(f1.sum === f2.sum);// false
+
+</code></pre>
+<p>![image-20190728151026472](/Users/xiaozhaoxia/Library/Application Support/typora-user-images/image-20190728151026472.png)</p>
+<pre><code class="language-js">function Fn(){
+  this.name = '笑话'
+  return 10;
+}
+var f = new Fn();// f依然是当前类的一个实例
+
+
+function Fn(){
+  this.name = '笑话'
+  return {name: 'xxx'};
+}
+var f = new Fn();// f不再是Fn的一个实例，而是变成手动返回的对象，  // name:'xxx'
+</code></pre>
+<blockquote>
+<p>当构造函数体中，我们自己手动设置了return（默认返回的是实例：对象类型值）,return 的是一个基本类型值，对最后的返回实例没有任何影响，但是如果返回的是引用数据类型的值，会把默认返回的实例替换掉。</p>
+</blockquote>
+<h3 id="instanceof">instanceOf</h3>
+<p>检测数据类型的四种方式：</p>
+<p>instanceOf</p>
+<p>typeOf :null 返回Object, 无法具体细分，</p>
+<p>constructor</p>
+<p>Object. toString()  call ??</p>
+<blockquote>
+<p>instanceOf 用来检测当前实例是否隶属于某个类</p>
+<p>解决了typeOf无法识别是数组还是正则的问题</p>
+</blockquote>
+<pre><code class="language-js">function Fn(){
+  
+}
+
+var f = new Fn();
+console.log(f instanceOf Fn); // true
+
+</code></pre>
+<pre><code class="language-js">[] instanceOf Array // true
+/^$/ instanceOf  Array // false
+解决了typeOf无法识别是数组还是正则的问题
+
+</code></pre>
+<h3 id="原型链查找">原型链查找</h3>
+<p>![image-20190728155850248](/Users/xiaozhaoxia/Library/Application Support/typora-user-images/image-20190728155850248.png)</p>
+<h3 id="hasownproperty-vs-in">hasOwnProperty  vs in</h3>
+<blockquote>
+<p>in： 用来检测当前这个属性是否隶属于对象（不管是对象私有的还是公有的属性，只要有返回的就是true）</p>
+<p>hasOwnProperty: 用来检测当前这个属性是否是对象的私有属性（不仅要是对象的属性，而且要是私有的才可以）</p>
+</blockquote>
+<pre><code class="language-js">var obj = {name: 'xiaohuao', age: 9};
+
+'name' in obj // true
+'sex' in obj // false;
+'toString' in obj  // true
+'hasOwnProperty' in obj // true 
+hasOwnProperty 是Object这个内置类中提供的属性方法，只要当前对象是Object的一个实例，就可以使用这个方法
+
+obj.hasOwnProperty('name'); //true
+obj.hasOwnProperty('hasOwnProperty'); // false  hasOwnProperty不是obj私有的，而是Object是的一个方法
+
+
+
+</code></pre>
+<blockquote>
+<p>检测一个属性是否是当前对象的公有属性</p>
+<p>1.是对象的一个属性</p>
+<p>2.不是对象的私有属性</p>
+</blockquote>
+<pre><code class="language-js">function hasPubProperty(attr,obj) {
+  return (attr in obj) &amp;&amp; (obj.hasOwnProperty(attr) === false);
+}
+
+hasPubProperty('hasOwnProperty', {xxx: 'xxx'});  hasOwnProperty是所有Object的一个属性
+
+
+
+</code></pre>
+<h3 id="原型和原型链property">原型和原型链（property）</h3>
+<h4 id="js中对象和函数汇总">JS中对象和函数汇总：</h4>
+<blockquote>
+<p>对象数据类型的值</p>
+<ul>
+<li>{}普通对象</li>
+<li>[]数组</li>
+<li>/^$/正则</li>
+<li>Math 数学函数</li>
+<li>一般类的实例都是对象数据类型的</li>
+<li>函数的property属性</li>
+<li>实例的__proto__属性</li>
+<li>函数也是对象数据类型的。？？</li>
+</ul>
+<p>函数数据类型值：</p>
+<ul>
+<li>普通函数</li>
+<li>所有的类（包含内置类和自定义类）</li>
+</ul>
+</blockquote>
+<h3 id="原型">原型</h3>
+<blockquote>
+<p>1.所有函数都天生自带一个属性：</p>
+<p>prototype（原型），它是一个对象数据类型的值，在当前对象中存储了类需要給其实例使用的公有的属性和方法</p>
+<p>2.在函数的prototype这个对象，浏览器会默认为其开辟一个堆内存，在这个堆内存中天生自带一个属性：</p>
+<p>constructor（构造函数)，这个属性存储的值就是当前函数本身</p>
+<p>3.每一个类的实例（每一个对象）都天生自带一个属性： _<em>proto</em>_，属性值是当前对象所属类的原型（prototype），</p>
+</blockquote>
+<pre><code class="language-js">function Fn(name,age) {
+  this.name = name;
+  thia.age = age;
+  this.say = function () {
+    consle.log('my name is '+ this.name + 'I am ' + this.age + 'years old!')
+  }
+}
+
+Fn.prototype.say= function () {
+  console.log('hello world')
+};
+
+Fn.prototype.eat= function () {
+  console.log('I like food')
+};
+
+var f1 = new Fn('王燕燕', 19);
+var f2 = new Fn('王雪超', 69);
+
+</code></pre>
+<p>![image-20190728185428138](/Users/xiaozhaoxia/Library/Application Support/typora-user-images/image-20190728185428138.png)</p>
+<p>![image-20190728185745656](/Users/xiaozhaoxia/Library/Application Support/typora-user-images/image-20190728185745656.png)</p>
+<p>![image-20190728192716932](/Users/xiaozhaoxia/Library/Application Support/typora-user-images/image-20190728192716932.png)</p>
+<p>![image-20190728192913523](/Users/xiaozhaoxia/Library/Application Support/typora-user-images/image-20190728192913523.png)</p>
+<p>私有和公有是一个相对论，我们需要看相对于哪个对象而言：</p>
+<p>1.相对于实例来说push是公有的</p>
+<p>2.相对于Array.prototype来说，push就是自己私有的</p>
+<p>凡是通过__proto__找到的属性都是公有的，反之都是私有的</p>
+<p>ary.</p>
+<p>让类数组： arguments可以使用数组的方法,   IE浏览器屏蔽了我们使用或者修改_<em>proto</em>_</p>
+<p>Arguments._<em>proto</em>_  = Array.prototype</p>
+<h3 id="原型链中的this问题">原型链中的this问题</h3>
+<pre><code class="language-js">function Fn(name,age) {
+  this.name = name;
+  thia.age = age;
+  this.say = function () {
+    consle.log('my name is '+ this.name + 'I am ' + this.age + 'years old!')
+  }
+}
+
+Fn.prototype.say = function () {
+  console.log('i am ' + this.age + 'years old');
+}
+Fn.prototype.eat = function () {
+  console.log('i love food');
+}
+              
+ var f1 = new Fn('张学波'，20)；
+  var f2 = new Fn('冀闯'，21)；
+  f1.say();  // =&gt; this: f1   查找私有的属性
+  f1.__proto__.say();// 查找公有的属性和方法， this： f1.__proto__ 
+ // 相当于 'i am '+ f1.__proto__.age (undefined) + 'years old' 
+  
+  Fn.prototype.say();  // undefined
+  
+  // 关于原型链中提供的私有（公有）方法中的this指向问题：
+  1.看点前面是谁，this就是谁
+   // f1.say();  // =&gt; this: f1
+   // f1.__proto__.say();// 查找公有的属性和方法， this： f1.__proto__ 
+    Fn.prototype.say();  // undefined  this：  Fn.prototype
+  2.把需要执行方法中的this进行替换
+  3.替换完成后，如果想要知道结果，只需要按照原型链的查找机制去查找即可
+
+
+
+</code></pre>
+<p>![image-20190728185745656](/Users/xiaozhaoxia/Library/Application Support/typora-user-images/image-20190728185745656.png)</p>
+<pre><code class="language-js">function Fn(name,age) {
+  this.name = name;
+  this.age = age;
+ 
+}
+
+var f  = new Fn('xxx',28);
+
+
+</code></pre>
+<p><a href="https://blog.csdn.net/shelbyandfxj/article/details/82769891">判断是不是空对象，空数组</a></p>
+<h3 id="批量增加">批量增加</h3>
+<pre><code class="language-js">function Fn(name,age) {
+  this.name = name ;
+  this.age = age;
+}
+Fn.prototype.aa = function (){
+}
+Fn.prototype.bb = function (){}
+var f = new Fn('xxx',25);
+
+/*  使用设置别名法 */
+//var pro = Fn.prototype; // =&gt; 指向同一个堆内存
+// 则pro.aa = functin(){};
+// pro.bb = function (){};
+
+
+// 重新构造原型
+Fn.prototype.cc = function (){...}
+Fn.prototype = {
+  // 让原型指向自己开辟的堆内存有一个问题：自己开辟的堆内存中没有constructor属性，所以实例在调取constructor的时候，找到的是Object，这样不好，此时我们应该重新设置一个constructor，保证机制的完整性
+  constructor: Fn,  // 所以加上
+  aa: function (){},
+  bb: function (){}
+ 
+}
+var pub = {}
+
+f.cc  =&gt; //undefined: 重新做原型指向后，之前在浏览器默认开辟的堆内存中存储的属性和方法都没用了，只有在新内存中存储的才是有用的
+
+
+// Array.prototype.aa = 12;
+// Array.prototype = {}; // 内置类原型不允许我们进行重构
+
+～function (){
+  var jQuery = function (selector,context) {
+    return new jQuery.fn.init(selector, context);
+  };
+  jQuery.fn = jQuery.prototype = {
+    constructor: jQuery,
+    init: function (selector,context)
+  };
+    window.$ = window.jQuery 
+}();
+
+</code></pre>
+<h3 id="基于内置类的原型扩展方法">基于内置类的原型扩展方法</h3>
+<pre><code class="language-js">// 数组去重方法
+
+// 我们新增加的方法最好设置一个前缀，防止我们新增的方法和内置的方法冲突，把内置方法替换掉了
+Array.prototyp.myDistinct = function myDistinct () {
+  this: // ary当前要处理的那个数组
+  var obj ={};
+   for(var i =0; i&lt; this.length; i++){
+    var item = this[i];
+    if(typeof obj[item] !== 'undefined'){
+      this[i] = this[this.length -1];
+      this.length--;
+      i--;
+      continue;
+    }
+    obj[item]= item;
+  }
+  obj = null;
+  return this; // 实现链式写法，返回去重后的数组，这样执行完成这个方法后，我们还可以继续调取数组中的其他方法
+}
+
+/*  function distinct(ary){
+  var obj = {};
+  for(var i =0; i&lt; ary.length; i++){
+    var item = ary[i];
+    if(typeof obj[item] !== 'undefined'){
+      ary[i] = ary[ary.length -1];
+      ary.length--;
+      i--;
+      continue;
+    }
+    obj[item]= item;
+  }
+  obj = null;
+  return ary;
+}
+*/
+
+var ary = [1,2,3,1,3,4,2];
+ary.myDistinct().sort();
+
+// console.log(distinct(ary));
+console.log(ary);
+
+// =&gt; 链式写法：执行完成一个方法紧跟着剧调取下一个方法(执行完成一个方法后，返回的结果依然是当前类的实例，这样就可以继续调取当前类的其他方法操作了)
+
+// ary.sort(function (a,b) {
+//  return a-b;     //push之后已经不是数组了，所有用pop方法已经不行了，pop是数组上的方法
+// }).push(100).pop(); // Uncaught TypeError: Ary.sort(...).push(...).pop is not a function 
+ary.sort(function (a,b) {
+  return a-b;
+}).push(100);
+
+</code></pre>
+<p>数组的    意义，参数，返回值，原来数组是否改变</p>
+<pre><code class="language-js">// 实现  (3).plus(2).minus(1)  =&gt; 4
+Number.prototype.plus = function plus () {
+  // 不传argument 。则undefined  =&gt; false 
+  var value = Number(arguments[0]) || 0;
+ return this + arguments[0]
+}
+Number.prototype.minus = function minus() {
+    var value = Number(arguments[0]) || 0;
+  return this - arguments[0];
+}
+
+console.log((3).plus(2).minus(1));
+
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#js%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1">JS面向对象</a></li>
+<li><a href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8Fsingleton-pattern">单例模式（Singleton Pattern)</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%AE%9E%E7%8E%B0%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91">使用单例模式实现模块化开发</a></li>
+<li><a href="#%E9%AB%98%E7%BA%A7%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F">高级单例模式</a></li>
+<li><a href="#%E5%85%B3%E4%BA%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84">关于数据类型的</a>
+<ul>
+<li><a href="#%E5%85%B3%E4%BA%8E%E5%85%83%E7%B4%A0%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%85%83%E7%B4%A0%E9%9B%86%E5%90%88%E7%9A%84">关于元素对象和元素集合的</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%80%BC">基于面向对象创建数据值</a></li>
+<li><a href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8Fconstructor">构造函数设计模式（constructor）</a></li>
+<li><a href="#%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E7%9A%84%E6%AD%A5%E9%AA%A4">深入理解构造函数执行的步骤</a></li>
+<li><a href="#instanceof">instanceOf</a></li>
+<li><a href="#%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%9F%A5%E6%89%BE">原型链查找</a></li>
+<li><a href="#hasownproperty-vs-in">hasOwnProperty  vs in</a></li>
+<li><a href="#%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BEproperty">原型和原型链（property）</a>
+<ul>
+<li><a href="#js%E4%B8%AD%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%87%BD%E6%95%B0%E6%B1%87%E6%80%BB">JS中对象和函数汇总：</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8E%9F%E5%9E%8B">原型</a></li>
+<li><a href="#%E5%8E%9F%E5%9E%8B%E9%93%BE%E4%B8%AD%E7%9A%84this%E9%97%AE%E9%A2%98">原型链中的this问题</a></li>
+<li><a href="#%E6%89%B9%E9%87%8F%E5%A2%9E%E5%8A%A0">批量增加</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E5%86%85%E7%BD%AE%E7%B1%BB%E7%9A%84%E5%8E%9F%E5%9E%8B%E6%89%A9%E5%B1%95%E6%96%B9%E6%B3%95">基于内置类的原型扩展方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://xiaozhaoxiaaa.github.io//post/call">
+              <h3 class="post-title">
+                call
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://xiaozhaoxiaaa.github.io//atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>

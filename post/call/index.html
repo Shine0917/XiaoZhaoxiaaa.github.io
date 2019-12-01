@@ -1,0 +1,411 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>call | Gridea</title>
+<meta name="description" content="温故而知新" />
+<link rel="shortcut icon" href="https://xiaozhaoxiaaa.github.io//favicon.ico?v=1575170270206">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://xiaozhaoxiaaa.github.io//styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://xiaozhaoxiaaa.github.io/">
+  <img class="avatar" src="https://xiaozhaoxiaaa.github.io//images/avatar.png?v=1575170270206" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              call
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-12-01
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="caller和arguments的callee">caller和arguments的callee</h2>
+<p>只要是函数就有prototype ,_<em>proto</em>_</p>
+<p>函数的caller</p>
+<pre><code class="language-js">// 函数中的caller表示： 当前这个函数在哪个函数中调用的
+function fn() {
+  fn.caller();// 死循环啦，一直执行
+ //  console.log(fn.caller);  F   // fn.caller 是一个函数  如果fn.caller(); 则相当于执行这个函数
+}
+function ff() {
+  fn();
+}
+ff(); // [Function: ff]
+
+function F() {
+  fn();  
+}
+F();  //[Function: F]
+
+</code></pre>
+<pre><code class="language-js">function fn() {
+  // arguments.callee就是当前函数本身
+  console.log(arguments.callee === fn);  // d
+}
+fn(1,2,3)
+
+// fn.prototype.constructor也是函数本身
+// fn.prototype.constructor === fn;
+// arguments.callee === fn
+
+// 递归：函数自己调用自己
+function sum(n) {
+  if(n==100) {
+    return n
+  }else {
+    return n+sum(n+1);
+    return n+arguments.callee(n+1); // 等价
+    return n+ sum.prototype.constructor(n+1); //等价
+  }
+}
+sum(0);
+</code></pre>
+<h2 id="call-applybind">call, apply,bind</h2>
+<h3 id="call作用">call作用：</h3>
+<p>1.改变前面函数的this<br>
+2.让前面的函数执行</p>
+<h3 id="call的参数问题">call的参数问题</h3>
+<p>call的第一个参数是给前面函数改this用的</p>
+<p>call从第二个参数开始，是给前面函数传递参数</p>
+<pre><code class="language-js">call: Function 类原型上的一个公有的方法
+1.任何函数都可以使用call方法
+2.call也是一个函数
+Function.prototype.call 是一个函数
+
+call作用：
+1.改变前面函数的this
+2.让前面的函数执行
+call的参数问题
+call(); &lt;=&gt;call(null); &lt;=&gt; call(undefined); 这三种情况前面函数的this是window 
+function fn() {
+  console.log(this);  // this: window
+}
+
+ fn.call(); fn.call(null);  fn.call(undefined)
+// fn.__proto__ 找到Function.prototype 
+
+call从第二个参数开始，是给前面函数传递参数
+var obj={};
+function fn(n,m) {
+  console.log(n,m,this);  //obj
+}
+fn.call(obj,2,3);
+
+//如果不想改变this，可以写成fn.call(null,2,3); 第一个参数可以是null, undefined
+
+
+var obj = {};
+function A(a){  // a= undefined;   a= 10;
+  this.a = 1;   // window.a = 1     obj.a =1;
+  this.b =a;  // window.b = undefined   obj.b =10;
+}
+A();  // 执行 此时的this 是window  A前面没有点
+A.call(obj,10);// this =&gt; obj
+console.log(a);// 1
+console.log(b);// undefined
+console.log(obj);  //{a:1, b:10}
+
+</code></pre>
+<pre><code class="language-js">call方法有两个作用： 让`点`前面的函数执行
+Function.prototype.call = function () {
+  // this 谁执行这个call方法，this就是谁
+  // call前面的函数就是this，既然call可以让前面的函数执行，在这里就是this执行
+  
+  //第一个参数没传,null,undefined,直接让this();
+  var ary = [...arguments].slice(1);// 第二个参数
+  if(arguments[0] ==undefined){  null == undefined
+     this(...ary);
+       // eval(&quot;this(&quot;+ary+&quot;)&quot;);
+  }else {
+    //为了保证传进来的第一个参数是一个引用数据类型
+    var obj = Object(auguments[0]); // Object将参数转为对象
+    
+    obj.__proto__.fn = this;
+    obj.fn(...ary);
+    delete obj.__proto__.fn;
+  }
+ 
+  //return 1;
+}
+function fn(){  
+  console.log('我是fn');
+}
+function fn1() {
+  console.log('我是fn1');
+}
+console.log(fn.call()); // 
+console.log(fn1.call()); 
+</code></pre>
+<h2 id="bind">bind</h2>
+<p>改变函数this得到一个新的函数</p>
+<p>// bind(), bind(null), bind(undefined),新函数的this都是window</p>
+<p>⚠️：bind不会让函数执行，</p>
+<pre><code class="language-js">function fn() {
+  console.log(this);
+}
+var ff = fn.bind();
+ff和fn长的一样，但是里面的this变成了bind改变后的
+console.log(ff.name); // &quot;bound fn&quot;
+
+
+var obj = {a:1};
+function f1() {
+  console.log(this);
+}
+setInterval(f1.bind(obj1),2000);  // 到点执行
+box.onclick = f1;  // 点击的时候执行
+f1();  ()执行
+</code></pre>
+<p>函数作为参数的都是函数的定义，没有执行</p>
+<h2 id="apply">apply</h2>
+<p>apply和call一样，都能让函数自动执行，唯一区别就是参数形式不一样</p>
+<p>// apply的第二个参数是一个数组或者是类数组，也是用来给前面函数传参数用的</p>
+<pre><code class="language-js">var obj = {a:1};
+function sum() {
+  console.log(this);
+  return [...arguments].reduce((prev,cur) =&gt; {
+    return prev+ cur;
+  })
+}
+
+console.log(sum.call(obj,1,2,3,4,5));
+console.log(sum.apply(obj,[1,2,3,4,5]));
+</code></pre>
+<h2 id="检测数据类型">检测数据类型</h2>
+<p>typeof: 可以详细检测基本数据类型, 但是null结果为object，但是引用数据类型不可以详细检测，只有两个结果，一个是<code>object</code>,一个是<code>function</code></p>
+<p>instanceOf: 用来检测一个实例是否属于某个类，但是对于基本数据类型来说，使用字面量创建方式创建的检测结果为false，但是构造函数创建方式没问题</p>
+<p>constructor： 可以通过<code>内容.constructor.name</code>得到数据类型，</p>
+<p>Object.prototype.toString.call(想要检测的数据类型)； // [object, 数据类型]</p>
+<pre><code>var obj = {a:1};
+console.log(obj.toString()); //[object Object]
+
+obj.toString(),是Object原型上的公有方法，toString()
+
+var ary = [1,2,3];
+obj.toString.call(ary);  [object, Array]
+console.log(obj.toString.call(ary).slice(8, -1)) // 包括8 ，不包括-1
+var str = &quot;123&quot;;
+obj.toString.call(str);   [object, String]
+
+
+</code></pre>
+<pre><code class="language-js">function FF() {
+  this.a = &quot;aa&quot;;
+  this.b = &quot;bb&quot;;
+}
+FF.prototype.getA = function () {}
+  var f1 = new FF();
+Object.prototype.zf = 'xiao';
+console.log(f1.__proto__.__proto__.zf);
+console.log(FF.prototype); 
+// 1.for既可以遍历私有属性也可以遍历公有属性，
+// 2.但是只能遍历可枚举的属性
+  for(var key in f1){
+    console.log(key);
+    console.log(f1[key]); 
+  }
+  
+console.log(Object.getOwnPropertyDescriptor(FF.prptotype, &quot;constructor&quot;));
+
+
+Object.prototype.zz = 'xixi';
+var obj1 = {name: 'xiaoming',age:12};
+var obj2 = {name: 'xiaoming', study:'js'};
+
+for(var key in obj2) {
+  if(obj2.hasOwnProperty(key)) { // 防止复制公有属性
+    obj1[key] = obj2[key];
+  }
+}
+
+console.log(obj1);
+
+
+function AA() {
+  this.x = 1;
+  this.y =2;
+}
+AA.prototype.getX = function (){};
+AA.prototype.getY = function (){};
+var aa = new AA;
+// 克隆一个跟aa一样的对象bb(aa的私有属性也是bb的私有属性，aa的公有属性也要加在bb所属类的原型上)
+function BB(){};
+var bb = new BB;
+
+</code></pre>
+<p>JSON是一种数据格式</p>
+<p>JSON对象 属性名必须使用双引号包起来</p>
+<pre><code class="language-js">var obj = {&quot;a&quot;:1,&quot;b&quot;:2};
+var ary = [{&quot;a&quot;: 1, &quot;b&quot;: 2}, {&quot;a&quot;: 10, &quot;b&quot;:20}]
+
+</code></pre>
+<h2 id="函数中的几个问题">函数中的几个问题</h2>
+<pre><code class="language-js">// 函数中的caller表示： 当前这个函数在哪个函数中调用的
+function fn() {
+  fn.caller();// 死循环啦
+ //  console.log(fn.caller);  F
+}
+function F() {
+  fn();  
+}
+F();
+console.log(fn.caller())
+</code></pre>
+<p>构造函数中的this是当前实例</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#caller%E5%92%8Carguments%E7%9A%84callee">caller和arguments的callee</a></li>
+<li><a href="#call-applybind">call, apply,bind</a>
+<ul>
+<li><a href="#call%E4%BD%9C%E7%94%A8">call作用：</a></li>
+<li><a href="#call%E7%9A%84%E5%8F%82%E6%95%B0%E9%97%AE%E9%A2%98">call的参数问题</a></li>
+</ul>
+</li>
+<li><a href="#bind">bind</a></li>
+<li><a href="#apply">apply</a></li>
+<li><a href="#%E6%A3%80%E6%B5%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">检测数据类型</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98">函数中的几个问题</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://xiaozhaoxiaaa.github.io//post/zi-fu-chuan-chu-li-shi-jian-zi-fu-chuan-ge-shi-hua">
+              <h3 class="post-title">
+                字符串处理-时间字符串格式化
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://xiaozhaoxiaaa.github.io//atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
