@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>xxxx | Gridea</title>
+<title>盒子模型 | Gridea</title>
 <meta name="description" content="温故而知新" />
 <link rel="shortcut icon" href="https://xiaozhaoxiaaa.github.io//favicon.ico?v=1575169970254">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,37 +73,102 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              xxxx
+              盒子模型
             </h2>
             <div class="post-info">
               <span>
                 2019-12-01
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h1 id="关于职场的两三点思考">关于职场的两三点思考</h1>
-<p>11.30日去旁听了scott组织的上海早早聊，听完之后，还是有很多共眠点，他们其中很多人做过的事情，不也就是曾经萌生过的想法，启发受益还是很多的，这些东西可能我现在一时还用不上，但是将来的某一天，估计就茅塞顿开，也许我们很多时候是需要一个领路人，一个榜样，一个目标。</p>
-<p>也提出过自己的疑问，对于我这个刚入职场的小白，应该怎么去克服自己的焦虑。其实自己心里也很清楚，除了学习，没有其他更好的方法，其中提到的一万行代码</p>
-<p>今天在掘金上也看到了scott的 关于职场困境的一些问题，先附上链接吧 https://juejin.im/post/5cd15648f265da038145eeb9</p>
-<p>反思最近这一段时间，自己的确松懈了不少，没有学习除需求之外·的技术，心里还是很焦虑的，</p>
-<h3 id="看书学习总结整理">看书学习，总结整理</h3>
-<p>同时留一些时间于行业前辈多交流，提前作出第三第四年的职业规划，突然想起，本科的时候上职业规划的课程，当时觉得这种东西有啥用，但现在步入职场才意识到，还是早规划，才会目标更清晰</p>
-<h3 id=""></h3>
+                <h2 id="client系列">client系列</h2>
+<h2 id="scroll系列">scroll系列</h2>
+<p>scrollWidth：如果内容没有溢出，跟clientWidth一样的，如果内容有溢出表示真实内容的宽+左padding</p>
+<p>scrollHeight：如果内容没有溢出，跟clientHeight一样的，如果内容有溢出表示真实的的高+上padding</p>
+<p>scrollLeft: 横向滚动的距离</p>
+<p>scrollTop：滚动条滚上去的距离</p>
+<p>获取浏览器一屏的宽/高</p>
+<p>document.documentElement.clientWidth || document.body.clientWidth;</p>
+<p>document.documentElement.clientHeight|| document.body/scrollHeight ;</p>
+<p>获取整个网页的宽高</p>
+<p>document.documentElement.scrollWidth || document.body.scrollWidth;</p>
+<p>document.documentElement.scrollHeight || document.body.scrollHeight;</p>
+<p>13个属性只有scrollLeft和scrollTop可以获取和设置，其他都是只能后去</p>
+<p>scrollLeft/scrollTop: 有最大值和最小值</p>
+<p>如果你设置的值大于最大值或小于最小值，此时就直接是最大值或者最小值</p>
+<p>scrollTop最小值：0</p>
+<p>scrollTop最大值：scrollHeight - clientHeight</p>
+<pre><code class="language-js">box.onscroll = function (){
+  
+}
+
+</code></pre>
+<h2 id="图片延迟加载">图片延迟加载</h2>
+<p>为了保证页面的打开速度防止出现网速崩溃的现象，一般图片比较大，或者比较多的时候我们让部分内容加载，图片后加载，首屏的图片我们必须要展示，我们可以给他一个延迟的时间，其他屏的内容，当图片漏出来之后再加载</p>
+<p><img src= "" alt="" /> 只要img的src有地址此时就会主动加载图片</p>
+<p>实现延迟加载的原理，我们不会将真实图片的地址放在img的src属性上 ，所以一般将真实图片的地址放在img的自定义属性上，等到想让img加载的时候，再将真实地址取出来还给src属性，这个时候图片也会自动加载出来。</p>
+<p>⚠️：1.为了保证页面美观，我们一开始给图片位置加一个占位符(背景图)</p>
+<p>2.地址还给img的src的时候。我们需要检测一下这个地址是否正确</p>
+<pre><code class="language-js">&lt;div id=&quot;box&quot;&gt; 
+  &lt;img src=&quot;&quot; alt=&quot;&quot; photo = &quot;./flower.jpg&quot; /&gt;
+&lt;/div&gt;
+
+#box {
+width: 300px;
+height: 200px;
+bgckground: url(./load.jpg) no-repeat center center;
+margin: 1000px auto;
+}
+#box img{
+width: 100%;
+height: 100%;
+}
+
+var box = document.getELementById('box');
+var oImg = box.getElementsByTagName(&quot;img&quot;)[0];
+// 获取一屏的高
+var winH = $.win(&quot;clientHeight&quot;);
+// 获取box的高
+var boxH = box.offsetHeight;
+// 获取box的上偏移量
+var boxT = $.offset(box).top;
+window.onscroll = function () {
+  
+  if($.win(&quot;scrollTop&quot;) + winH &gt;= boxH + boxT) {
+    // 此时图片完全露出来
+    // 先将图片的真实地址从自定义属性photo中取出来
+    var photo = oImg.getAttribute(&quot;photo&quot;);
+    // 将真实地址还给oImg之前先验证一下，这个地址是否正确
+    // 创建一个oImg的替身
+    var substitute = new Image;
+    // 将地址photo先给替身试试
+    substitute.src = photo;
+    // onload: 加载成功
+    substitute.onload = function () {
+      
+    }
+    // onerror: 加载失败
+    
+    oImg.src= photo;
+  }
+}
+</code></pre>
+<p>scrollTop+clientHeight &gt;= box.offsetHeight+ box.offsetTop</p>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
-<li><a href="#%E5%85%B3%E4%BA%8E%E8%81%8C%E5%9C%BA%E7%9A%84%E4%B8%A4%E4%B8%89%E7%82%B9%E6%80%9D%E8%80%83">关于职场的两三点思考</a><br>
-*
+<li>
 <ul>
-<li><a href="#%E7%9C%8B%E4%B9%A6%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%E6%95%B4%E7%90%86">看书学习，总结整理</a></li>
-<li></li>
+<li><a href="#client%E7%B3%BB%E5%88%97">client系列</a></li>
+<li><a href="#scroll%E7%B3%BB%E5%88%97">scroll系列</a></li>
+<li><a href="#%E5%9B%BE%E7%89%87%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD">图片延迟加载</a></li>
 </ul>
 </li>
 </ul>
@@ -116,9 +181,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://xiaozhaoxiaaa.github.io//post/hello-gridea">
+            <a href="https://xiaozhaoxiaaa.github.io//post/xxxx">
               <h3 class="post-title">
-                Hello Gridea
+                xxxx
               </h3>
             </a>
           </div>

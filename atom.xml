@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xiaozhaoxiaaa.github.io/</id>
     <title>Gridea</title>
-    <updated>2019-12-01T03:06:19.488Z</updated>
+    <updated>2019-12-01T03:12:58.657Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xiaozhaoxiaaa.github.io/"/>
     <link rel="self" href="https://xiaozhaoxiaaa.github.io//atom.xml"/>
@@ -10,6 +10,87 @@
     <logo>https://xiaozhaoxiaaa.github.io//images/avatar.png</logo>
     <icon>https://xiaozhaoxiaaa.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[盒子模型]]></title>
+        <id>https://xiaozhaoxiaaa.github.io//post/he-zi-mo-xing</id>
+        <link href="https://xiaozhaoxiaaa.github.io//post/he-zi-mo-xing">
+        </link>
+        <updated>2019-12-01T03:12:31.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="client系列">client系列</h2>
+<h2 id="scroll系列">scroll系列</h2>
+<p>scrollWidth：如果内容没有溢出，跟clientWidth一样的，如果内容有溢出表示真实内容的宽+左padding</p>
+<p>scrollHeight：如果内容没有溢出，跟clientHeight一样的，如果内容有溢出表示真实的的高+上padding</p>
+<p>scrollLeft: 横向滚动的距离</p>
+<p>scrollTop：滚动条滚上去的距离</p>
+<p>获取浏览器一屏的宽/高</p>
+<p>document.documentElement.clientWidth || document.body.clientWidth;</p>
+<p>document.documentElement.clientHeight|| document.body/scrollHeight ;</p>
+<p>获取整个网页的宽高</p>
+<p>document.documentElement.scrollWidth || document.body.scrollWidth;</p>
+<p>document.documentElement.scrollHeight || document.body.scrollHeight;</p>
+<p>13个属性只有scrollLeft和scrollTop可以获取和设置，其他都是只能后去</p>
+<p>scrollLeft/scrollTop: 有最大值和最小值</p>
+<p>如果你设置的值大于最大值或小于最小值，此时就直接是最大值或者最小值</p>
+<p>scrollTop最小值：0</p>
+<p>scrollTop最大值：scrollHeight - clientHeight</p>
+<pre><code class="language-js">box.onscroll = function (){
+  
+}
+
+</code></pre>
+<h2 id="图片延迟加载">图片延迟加载</h2>
+<p>为了保证页面的打开速度防止出现网速崩溃的现象，一般图片比较大，或者比较多的时候我们让部分内容加载，图片后加载，首屏的图片我们必须要展示，我们可以给他一个延迟的时间，其他屏的内容，当图片漏出来之后再加载</p>
+<p><img src= "" alt="" /> 只要img的src有地址此时就会主动加载图片</p>
+<p>实现延迟加载的原理，我们不会将真实图片的地址放在img的src属性上 ，所以一般将真实图片的地址放在img的自定义属性上，等到想让img加载的时候，再将真实地址取出来还给src属性，这个时候图片也会自动加载出来。</p>
+<p>⚠️：1.为了保证页面美观，我们一开始给图片位置加一个占位符(背景图)</p>
+<p>2.地址还给img的src的时候。我们需要检测一下这个地址是否正确</p>
+<pre><code class="language-js">&lt;div id=&quot;box&quot;&gt; 
+  &lt;img src=&quot;&quot; alt=&quot;&quot; photo = &quot;./flower.jpg&quot; /&gt;
+&lt;/div&gt;
+
+#box {
+width: 300px;
+height: 200px;
+bgckground: url(./load.jpg) no-repeat center center;
+margin: 1000px auto;
+}
+#box img{
+width: 100%;
+height: 100%;
+}
+
+var box = document.getELementById('box');
+var oImg = box.getElementsByTagName(&quot;img&quot;)[0];
+// 获取一屏的高
+var winH = $.win(&quot;clientHeight&quot;);
+// 获取box的高
+var boxH = box.offsetHeight;
+// 获取box的上偏移量
+var boxT = $.offset(box).top;
+window.onscroll = function () {
+  
+  if($.win(&quot;scrollTop&quot;) + winH &gt;= boxH + boxT) {
+    // 此时图片完全露出来
+    // 先将图片的真实地址从自定义属性photo中取出来
+    var photo = oImg.getAttribute(&quot;photo&quot;);
+    // 将真实地址还给oImg之前先验证一下，这个地址是否正确
+    // 创建一个oImg的替身
+    var substitute = new Image;
+    // 将地址photo先给替身试试
+    substitute.src = photo;
+    // onload: 加载成功
+    substitute.onload = function () {
+      
+    }
+    // onerror: 加载失败
+    
+    oImg.src= photo;
+  }
+}
+</code></pre>
+<p>scrollTop+clientHeight &gt;= box.offsetHeight+ box.offsetTop</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[xxxx]]></title>
         <id>https://xiaozhaoxiaaa.github.io//post/xxxx</id>
